@@ -9,46 +9,18 @@ public class ElfPlayer : Player
 {
     AudioSource audioSource;
     private int Screams;
-    [SerializeField] TextMeshProUGUI ScreamText;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
-        Screams = PlayerPrefs.GetInt("Screams");
-        SetScreamText();
-    }
+    public TextMeshProUGUI ScreamText;
 
     private void OnEnable()
     {
-        controller = FindObjectOfType<InputManager>();
-        controller.OnJump.AddListener(Jump);
-        controller.OnAction.AddListener(Action);
-        ScreamText.enabled = true;
-        filter.mesh = Mesh;
         SetEquipment(Equipment);
+        audioSource = GetComponent<AudioSource>();
+        Screams = PlayerPrefs.GetInt("Screams");
     }
 
     private void OnDisable()
     {
-        controller.OnJump.RemoveListener(Jump);
-        controller.OnAction.RemoveListener(Action);
         ScreamText.enabled = false;
-    }
-
-    public override void Jump()
-    {
-        if (IsGrounded())
-        {
-            timesJumped = 0;
-        }
-
-        if (timesJumped < jumpAmount)
-        {
-            float tempJumpForce = jumpForce + Equipment.JumpMod;
-            rb.AddForce(Vector3.up * tempJumpForce, ForceMode.Impulse);
-            timesJumped++;
-        }
     }
 
     public override void Action()
@@ -63,7 +35,7 @@ public class ElfPlayer : Player
         SetScreamText();
     }
 
-    private void SetScreamText()
+    public void SetScreamText()
     {
         ScreamText.text = "Screams: " + Screams;
     }

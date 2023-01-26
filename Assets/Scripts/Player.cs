@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     public Rigidbody rb;
     public InputManager controller;
+    public EquipmentManager equipmentManager;
 
     public float moveSpeed;
     public float jumpForce;
@@ -28,9 +29,11 @@ public class Player : MonoBehaviour
 
     public LayerMask groundLayer;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         controller = FindObjectOfType<InputManager>();
+        equipmentManager = FindObjectOfType<EquipmentManager>();
+        SetEquipment(equipmentManager.GetRandomEquipment());
         rb = GetComponent<Rigidbody>();
         MeshRenderer = GetComponent<MeshRenderer>();
         controller.OnJump.AddListener(Jump);
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
     {
         if(equipment == Equipment)
         {
+            print(equipment.ToString());
             return;
         }
         else
@@ -83,6 +87,7 @@ public class Player : MonoBehaviour
             {
                 Equipment = equipment;
                 MeshRenderer.material.color = Equipment.color;
+                print("setcolor");
             }
         }
     }

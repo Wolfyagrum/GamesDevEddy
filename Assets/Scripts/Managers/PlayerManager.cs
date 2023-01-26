@@ -1,61 +1,71 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private HumanPlayer HumanPlayer;
-    [SerializeField] private ElfPlayer ElfPlayer;
-    [SerializeField] private DwarfPlayer DwarfPlayer;
+    [SerializeField] private GameObject HumanPlayer;
+    [SerializeField] private GameObject ElfPlayer;
+    [SerializeField] private GameObject DwarfPlayer;
+
+    [SerializeField] private TextMeshProUGUI ScreamText;
+
+    private GameObject current;
 
     private int index = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        current = Instantiate(HumanPlayer, new Vector3(0,2,0), Quaternion.identity);
     }
 
     public void SwitchChar()
     {
-        HumanPlayer.enabled = false;
-        ElfPlayer.enabled = false;
-        DwarfPlayer.enabled = false;
-
-        if(index == 0)
+        Vector3 location = current.transform.position;
+        Destroy(current);
+        if (index == 0)
         {
             index = 1;
-            HumanPlayer.enabled = true;
+            current = Instantiate(HumanPlayer,new Vector3(location.x,location.y,location.z), Quaternion.identity);
         }
 
         else if(index == 1)
         {
             index = 2;
-            ElfPlayer.enabled = true;
+            current = Instantiate(ElfPlayer, new Vector3(location.x, location.y, location.z), Quaternion.identity);
+            ElfPlayer elf = current.GetComponent<ElfPlayer>();
+            elf.ScreamText = ScreamText;
+            ScreamText.enabled = true;
+            elf.SetScreamText();
         }
 
         else if(index == 2)
         {
             index = 0;
-            DwarfPlayer.enabled = true;
+            current = Instantiate(DwarfPlayer, new Vector3(location.x, location.y, location.z), Quaternion.identity);
         }
     }
 
     public void EquipmentChange(Equipment equipment)
     {
-        if (index == 0)
-        {
-            DwarfPlayer.SetEquipment(equipment);
-        }
 
-        else if (index == 1)
+        ElfPlayer elf = current.GetComponent<ElfPlayer>();
+        DwarfPlayer dwarf = current.GetComponent<DwarfPlayer>();
+        HumanPlayer human = current.GetComponent<HumanPlayer>();
+        if(elf != null)
         {
-            HumanPlayer.SetEquipment(equipment);
+            elf.SetEquipment(equipment);
         }
-
-        else if (index == 2)
+        else if(dwarf != null)
         {
-            ElfPlayer.SetEquipment(equipment);
+            dwarf.SetEquipment(equipment);
+        }
+        else if(human != null)
+        {
+            human.SetEquipment(equipment);
         }
     }
 }
