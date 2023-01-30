@@ -9,6 +9,11 @@ public class EquipmentManager : MonoBehaviour
 
     public Equipment GetRandomEquipment()
     {
+        if(equipmentList.Count == 0)
+        {
+            print(equipmentList.Count);
+            return null;
+        }
         int random = Random.Range(0, equipmentList.Count);
         return equipmentList[random];
     }

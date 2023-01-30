@@ -24,15 +24,13 @@ public class Player : MonoBehaviour
     public MeshRenderer MeshRenderer;
     public Equipment Equipment;
 
-
-
-
     public LayerMask groundLayer;
     // Start is called before the first frame update
     void Awake()
     {
         controller = FindObjectOfType<InputManager>();
         equipmentManager = FindObjectOfType<EquipmentManager>();
+        print(equipmentManager);
         SetEquipment(equipmentManager.GetRandomEquipment());
         rb = GetComponent<Rigidbody>();
         MeshRenderer = GetComponent<MeshRenderer>();

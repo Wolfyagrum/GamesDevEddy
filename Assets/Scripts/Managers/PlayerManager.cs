@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI ScreamText;
 
-    private GameObject current;
+    [SerializeField] private GameObject current;
 
     private int index = 1;
 

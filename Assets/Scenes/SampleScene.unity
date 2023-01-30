@@ -447,8 +447,6 @@ GameObject:
   - component: {fileID: 111473446}
   - component: {fileID: 111473445}
   - component: {fileID: 111473444}
-  - component: {fileID: 111473449}
-  - component: {fileID: 111473448}
   m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
@@ -534,32 +532,6 @@ Transform:
   m_Father: {fileID: 708877450}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &111473448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111473443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b532d6da3f5051c46bd830af43031677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipmentList: []
---- !u!114 &111473449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111473443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b532d6da3f5051c46bd830af43031677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipmentList: []
 --- !u!1 &144597503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1959968476350000271, guid: 32b31338507ebcf42ac9976f7b74a25c, type: 3}
@@ -3122,6 +3094,7 @@ MonoBehaviour:
   ElfPlayer: {fileID: 7568156849474365656, guid: 5fa63f31795181e428d67aa17a367d19, type: 3}
   DwarfPlayer: {fileID: 7568156849474365656, guid: b08b0cfd49b46e745881ba3488e878e3, type: 3}
   ScreamText: {fileID: 1948262900}
+  current: {fileID: 0}
 --- !u!1001 &1111460192
 PrefabInstance:
   m_ObjectHideFlags: 0
